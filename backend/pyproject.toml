@@ -14,3 +14,33 @@ dependencies = [
     "sqlmodel>=0.0.34",
     "ty>=0.0.17",
 ]
+
+[tool.ty]
+strict = true
+warn-unused-ignores = true
+no-implicit-optional = true
+include = [
+    "src/**"
+]
+
+[tool.ruff]
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # bugbear
+    "C4",  # comprehensions
+    "SIM", # simplifications
+]
+ignore = [
+    "E501",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
