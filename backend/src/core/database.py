@@ -1,5 +1,5 @@
 from fastapi import Depends
-from sqlalchemy.sql.annotation import Annotated
+from typing import Annotated
 from sqlmodel import select, create_engine, Session, SQLModel
 from .config import settings
 from .models import User
