@@ -1,4 +1,4 @@
-from src.core.settings.settings import EnvSettings
+from reminder.core.settings.settings import EnvSettings
 from pydantic import Field
 
 
