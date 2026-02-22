@@ -1,10 +1,9 @@
-from fastapi import Depends
 from typing import Annotated
-from sqlmodel import select, create_engine, Session, SQLModel
+
+from fastapi import Depends
+from sqlmodel import Session, SQLModel, create_engine
+
 from .config import settings
-from .models import User
-
-
 
 engine = create_engine(settings.database_uri)
 

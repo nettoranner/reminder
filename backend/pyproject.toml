@@ -9,11 +9,19 @@ dependencies = [
     "fastapi[standard]>=0.129.0",
     "pre-commit>=4.5.1",
     "psycopg[binary]>=3.3.3",
+    "pwdlib[argon2]>=0.3.0",
     "pydantic>=2.12.5",
+    "pyjwt>=2.11.0",
     "ruff>=0.15.2",
     "sqlmodel>=0.0.34",
     "ty>=0.0.17",
 ]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.ty]
 strict = true
