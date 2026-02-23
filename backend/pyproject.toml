@@ -31,6 +31,10 @@ include = [
     "src/**"
 ]
 
+exclude = [
+    "src/reminder/alembic**",
+]
+
 [tool.ruff]
 line-length = 100
 src = ["src"]
@@ -52,3 +56,7 @@ ignore = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+exclude = [
+    "src/reminder/alembic**",
+]
