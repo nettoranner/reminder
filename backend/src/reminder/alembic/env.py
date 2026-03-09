@@ -1,11 +1,10 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from reminder.core.config import settings
-
 from alembic import context
-from reminder.core.models import SQLModel
+from sqlalchemy import engine_from_config, pool
+
+from reminder.core.config import settings
+from reminder.models import SQLModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

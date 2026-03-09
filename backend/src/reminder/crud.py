@@ -2,8 +2,8 @@
 from fastapi import HTTPException
 from sqlmodel import Session, select
 
-from reminder.core.models import User, UserCreate, UserUpdate
 from reminder.core.security import get_password_hash, verify_password
+from reminder.models import User, UserCreate, UserUpdate
 
 
 def get_user_by_username(session: Session, username: str) -> User | None:

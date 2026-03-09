@@ -1,15 +1,15 @@
 from fastapi import APIRouter, HTTPException
 
 import reminder.crud as crud
+from reminder.api.deps import CurrentUser
 from reminder.core.database import SessionDep
-from reminder.core.deps import CurrentUser
-from reminder.core.models import UserCreate, UserPublic, UserUpdate
+from reminder.models import UserCreate, UserPublic, UserUpdate
 
 router = APIRouter(prefix="/user", tags=["users"])
 
 @router.post("/signup", response_model=UserPublic)
 def register_user(user_create: UserCreate, session: SessionDep):
-    user = crud.get_user_by_username(session, user_create.username)
+    user = crud.get_user_by_username(session, user_create.username)  #FIXME: unresolved-attribute
     if user:
         raise HTTPException(status_code=400, detail="Username already registered")
     

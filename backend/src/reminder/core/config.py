@@ -1,6 +1,6 @@
 from pydantic import Field
 
-from reminder.core.settings.settings import EnvSettings
+from reminder.core.settings import EnvSettings
 
 
 class Settings(EnvSettings):

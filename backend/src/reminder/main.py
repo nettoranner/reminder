@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from reminder.api.routers import auth, user
 from reminder.core.config import settings
 from reminder.core.database import create_db_and_tables
-from reminder.routers import auth, user
 
 app = FastAPI()
 

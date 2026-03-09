@@ -1,23 +1,21 @@
 from datetime import timedelta
-from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, HTTPException, status
 
 import reminder.crud as crud
 from reminder.core.config import settings
 from reminder.core.database import SessionDep
 from reminder.core.security import create_access_token
-from reminder.core.settings.base import Token
+from reminder.models import LoginRequest, TokenResponse, UserCreate, UserPublic
 
 router = APIRouter(tags=["auth"])
 
 
-@router.post("/token", response_model=Token)
+@router.post("/login", response_model=TokenResponse)
 async def login(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    form_data: LoginRequest,
     session: SessionDep
-) -> Token:
+) -> TokenResponse:
     user = crud.authenticate_user(session, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -30,4 +28,13 @@ async def login(
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return Token(access_token=access_token, token_type="bearer")
+    return TokenResponse(access_token=access_token, token_type="bearer")
+
+
+@router.post("/signup", response_model=UserPublic)
+def register_user(user_create: UserCreate, session: SessionDep):
+    user = crud.get_user_by_username(session, user_create.username)  #FIXME: unresolved-attribute
+    if user:
+        raise HTTPException(status_code=400, detail="Username already registered")
+    
+    return crud.create_user(session, user_create)
