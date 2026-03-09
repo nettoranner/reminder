@@ -31,9 +31,9 @@ async def login(
     return TokenResponse(access_token=access_token, token_type="bearer")
 
 
-@router.post("/signup", response_model=UserPublic)
+@router.post("/singup", response_model=UserPublic)
 def register_user(user_create: UserCreate, session: SessionDep):
-    user = crud.get_user_by_username(session, user_create.username)  #FIXME: unresolved-attribute
+    user = crud.get_user_by_username(session, user_create.username)
     if user:
         raise HTTPException(status_code=400, detail="Username already registered")
     

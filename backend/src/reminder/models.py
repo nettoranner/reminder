@@ -7,21 +7,20 @@ from sqlmodel import Field, Relationship, SQLModel
 #FIXME: Refactor all models classes. Divine public and private models
 
 class UserBase(SQLModel):
-    name: str = Field(index=True)
+    username: str = Field(index=True)
     email: EmailStr = Field(unique=True, index=True, max_length=255)
 
 
 # Base User class
 class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    username: str
     hashed_password: str
     items: list[Finance] = Relationship(back_populates="owner", cascade_delete=True)
 
 
 # Properties to recieve via API on Creation
 class UserCreate(UserBase):
-    password: int = Field(min_length=8, max_length=128)
+    password: str = Field(min_length=8, max_length=128)
 
 
 class UserRegister(SQLModel):
